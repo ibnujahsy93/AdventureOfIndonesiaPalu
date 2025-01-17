@@ -14,11 +14,17 @@ public class ControlPos : MonoBehaviour
        
 
     }
-    public List<ObjectList> savedPosition; //Berapa Banyak Posisi template posisi object yang diinginkan
+    public List<ObjectList> savedPosition, savedHintPos; //Berapa Banyak Posisi template posisi object yang diinginkan
 
     [Header("Objects")]
     public GameObject objectParent;
     public int saveNumber;
+
+    [Header("Hints")]
+    public GameObject hintObject;
+    public int saveValHint;
+
+
 
     private void Awake()
     {
@@ -52,6 +58,26 @@ public class ControlPos : MonoBehaviour
             {
                 savedPosition[saveNumber].objectPos[i] = objectParent.transform.GetChild(i).transform.localPosition;
                 savedPosition[saveNumber].objectScale[i] = objectParent.transform.GetChild(i).transform.localScale;
+            }
+        }
+
+        
+    }
+
+    public void SavedHintPosition()
+    {
+        for (int i = 0; i < hintObject.transform.childCount; i++)
+        {
+            if (savedHintPos[saveValHint].objectPos.Count < hintObject.transform.childCount) //Menyimpas Save pos baru
+            {
+                savedHintPos[saveValHint].objectPos.Add(hintObject.transform.GetChild(i).transform.localPosition);
+                savedHintPos[saveValHint].objectScale.Add(hintObject.transform.GetChild(i).transform.localScale);
+
+            }
+            else //Menimpa Value yang sudah ada
+            {
+                savedHintPos[saveValHint].objectPos[i] = hintObject.transform.GetChild(i).transform.localPosition;
+                savedHintPos[saveValHint].objectScale[i] = hintObject.transform.GetChild(i).transform.localScale;
             }
         }
     }

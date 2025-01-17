@@ -16,5 +16,10 @@ public class ControlPosEditor : Editor
         {
             myScript.SaveObjectPosition();
         }
+
+        if (GUILayout.Button("Save Hint Pos"))
+        {
+            myScript.SavedHintPosition();
+        }
     }
 }
